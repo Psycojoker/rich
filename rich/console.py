@@ -1667,6 +1667,7 @@ class Console:
 
     def print_exception(
         self,
+        trace=None,
         *,
         width: Optional[int] = 100,
         extra_lines: int = 3,
@@ -1674,9 +1675,10 @@ class Console:
         word_wrap: bool = False,
         show_locals: bool = False,
     ) -> None:
-        """Prints a rich render of the last exception and traceback.
+        """Prints a rich render of the given as argument or last exception and traceback.
 
         Args:
+            trace (Trace, optional): A `Trace` object produced from `extract`. Defaults to None, which uses
             width (Optional[int], optional): Number of characters used to render code. Defaults to 88.
             extra_lines (int, optional): Additional lines of code to render. Defaults to 3.
             theme (str, optional): Override pygments theme used in traceback
@@ -1686,6 +1688,7 @@ class Console:
         from .traceback import Traceback
 
         traceback = Traceback(
+            trace=trace,
             width=width,
             extra_lines=extra_lines,
             theme=theme,
